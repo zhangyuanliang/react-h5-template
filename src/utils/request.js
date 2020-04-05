@@ -1,11 +1,11 @@
 import axios from 'axios'
 import { Toast } from 'antd-mobile';
 
-const BASE_API = '/'
+// const BASE_API = '/'
 
 // 创建axios实例
 const service = axios.create({
-  baseURL: process.env.NODE_ENV === 'development' ? BASE_API : null,
+  // baseURL: process.env.NODE_ENV === 'development' ? BASE_API : null,
   timeout: 8000 // 请求超时时间
 })
 
@@ -29,7 +29,7 @@ service.interceptors.response.use(
       Toast.info('error')
       return Promise.reject('error')
     }
-    return Promise.resolve(response.data)
+    return Promise.resolve(res)
   },
   error => {
     Toast.offline('请求失败，请检查网络状况')

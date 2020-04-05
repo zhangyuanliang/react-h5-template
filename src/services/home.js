@@ -1,8 +1,9 @@
 import request from '../utils/request.js'
 
-export function getTodos() {
+export function testHttp(data) {
   return request({
-    url: '/todos/getTodos',
-    method: 'post'
+    url: '/api/user/pcUser/login',
+    method: 'post',
+    data
   })
 }
