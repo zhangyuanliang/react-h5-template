@@ -1,0 +1,20 @@
+const { override, fixBabelImports, addPostcssPlugins, addLessLoader } = require("customize-cra");
+
+module.exports = override(
+  fixBabelImports("import", {
+    libraryName: "antd-mobile",
+    style: "css",
+  }),
+  addLessLoader({
+    javascriptEnabled: true,
+    modifyVars: { '@primary-color': '#1DA57A' },
+  }),
+  addPostcssPlugins([
+    require("autoprefixer")(),
+    require("postcss-pxtorem")({
+      rootValue: 37.5,
+      propList: ["*", "!border*"],
+      selectorBlackList: ["am"], // and-mobile css
+    }),
+  ]),
+);
