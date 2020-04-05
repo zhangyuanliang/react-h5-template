@@ -19,3 +19,4 @@ You will also see any lint errors in the console.
 
 ### `添加webpack配置`
 采用了插件`react-app-rewired`，在 `config-overrides.js`文件中覆盖配置。
+包括proxy代理配置、less、别名等。
