@@ -1,31 +1,35 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { actions } from '../../redux/modules/common'
+import { actions } from '@/redux/modules/common'
 import { withRouter } from 'react-router-dom'
 import { createForm } from 'rc-form';
 import { InputItem, Button } from 'antd-mobile';
 import { Toast } from 'antd-mobile';
-import { setToken } from '../../utils/auth'
+import { setToken } from '@/utils/auth'
 import './index.less'
 
 class Login extends Component {
 
   login = () => {
-    const { form, history, setUserInfo } = this.props
+    const { form, history, setUserInfo, changeIsloading } = this.props
     console.log(this)
     form.validateFields((error, value) => {
       if (error) {
         Toast.info('请输入')
         return
       }
-      setToken('test-token')
-      setUserInfo({
-        userName: value.userName,
-        password: value.password
-      })
-      history.push({
-        pathname: '/home'
-      });
+      changeIsloading(true)
+      setTimeout(() => {
+        changeIsloading(false)
+        setToken('test-token')
+        setUserInfo({
+          userName: value.userName,
+          password: value.password
+        })
+        history.push({
+          pathname: '/home'
+        });
+      }, 2000)
     });
   }
 
@@ -65,6 +69,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     setUserInfo(userInfo) {
       const action = actions.setUserInfo(userInfo)
       dispatch(action)
+    },
+    changeIsloading(isLoading) {
+      dispatch(actions.changeIsloading(isLoading));
     },
   }
 }
